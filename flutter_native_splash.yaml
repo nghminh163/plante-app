@@ -1,0 +1,11 @@
+flutter_native_splash:
+  color: "#f3f7ee"
+  image: assets/icons/foreground-splash.png
+  android: true
+  ios: true
+  web: false
+  fullscreen: true
+  info_plist_files:
+    - 'ios/Runner/Info-Debug.plist'
+    - 'ios/Runner/Info-Release.plist'
+  android12: true

@@ -1,0 +1,10 @@
+os: osx
+language: swift
+osx_image: xcode12.5
+
+install:
+  - bundle install
+
+script:
+  - cd ios
+  - fastlane ios deploy

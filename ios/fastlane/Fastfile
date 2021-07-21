@@ -22,6 +22,7 @@ platform :ios do
 
   desc "deploy"
   lane :deploy do
+    setup_travis
     sync_code_signing(
       type: "appstore",
       app_identifier: 'com.plante.app',

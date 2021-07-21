@@ -1,0 +1,5 @@
+app_identifier("com.plante.app") # The bundle identifier of your app
+apple_id("ngocanhnckh@gmail.com") # Your Apple email address
+
+itc_team_id("120455972") # App Store Connect Team ID
+team_id("A3W6G8FQ2L") # Developer Portal Team ID

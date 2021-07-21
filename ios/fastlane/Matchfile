@@ -1,0 +1,5 @@
+git_url("git@github.com:nghminh163/plante-cert.git")
+
+storage_mode("git")
+
+type("appstore")

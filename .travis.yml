@@ -8,3 +8,4 @@ install:
 script:
   - cd ios
   - fastlane ios deploy
+  

@@ -17,9 +17,11 @@ jobs:
       - name: Run Flutter tasks
         uses: subosito/flutter-action@v1
         with:
-          flutter-version: '1.17.5'
-      - run: flutter pub get
-      - run: flutter build ios --release --no-codesign
+          flutter-version: '2.0.5'
+      - name: Install dependancies for Flutter
+        run: flutter pub get
+      - name: Flutter build without sign
+        run: flutter build ios --release --no-codesign
       - name: Deploy iOS Beta to TestFlight via Fastlane
         uses: maierj/fastlane-action@v1.4.0
         with:
@@ -37,3 +39,9 @@ jobs:
           PROVISIONING_PROFILE_SPECIFIER: '${{ secrets.PROVISIONING_PROFILE_SPECIFIER }}'
           TEMP_KEYCHAIN_PASSWORD: '${{ secrets.TEMP_KEYCHAIN_PASSWORD }}'
           TEMP_KEYCHAIN_USER: '${{ secrets.TEMP_KEYCHAIN_USER }}'
+      - name: Notify by Telegram
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          args: The new version for iOS released on Testflight 🙆‍♂️🙆‍♀️

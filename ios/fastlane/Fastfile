@@ -31,9 +31,7 @@ platform :ios do
     keychain_name = TEMP_KEYCHAIN_USER
     keychain_password = TEMP_KEYCHAIN_PASSWORD
     ensure_temp_keychain(keychain_name, keychain_password)
-    increment_build_number({
-      build_number: latest_testflight_build_number + 1
-    })    
+
     match(
       type: 'appstore',
       app_identifier: "#{DEVELOPER_APP_IDENTIFIER}",
@@ -42,6 +40,10 @@ platform :ios do
       keychain_name: keychain_name,
       keychain_password: keychain_password 
     )
+    
+    increment_build_number({
+      build_number: latest_testflight_build_number + 1
+    })    
 
     gym(
       configuration: "Release",

@@ -45,9 +45,9 @@ jobs:
           PROVISIONING_PROFILE_SPECIFIER: "${{ secrets.PROVISIONING_PROFILE_SPECIFIER }}"
           TEMP_KEYCHAIN_PASSWORD: "${{ secrets.TEMP_KEYCHAIN_PASSWORD }}"
           TEMP_KEYCHAIN_USER: "${{ secrets.TEMP_KEYCHAIN_USER }}"
-          KEY_ID: "${{KEY_ID}}"
-          ISSUER_ID: "${{ISSUER_ID}}"
-          KEY_FILE: "${{KEY_FILE}}"
+          KEY_ID: "${{secrets.KEY_ID}}"
+          ISSUER_ID: "${{secrets.ISSUER_ID}}"
+          KEY_FILE: "${{secrets.KEY_FILE}}"
 
       - name: Notify by Telegram
         uses: appleboy/telegram-action@master

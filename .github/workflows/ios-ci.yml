@@ -49,6 +49,10 @@ jobs:
           ISSUER_ID: "${{secrets.ISSUER_ID}}"
           KEY_CONTENT: "${{secrets.KEY_CONTENT}}"
 
+  send_notification:
+    name: Deploy beta build to TestFlight
+    runs-on: ubuntu-latest
+    steps:
       - name: Notify by Telegram
         uses: appleboy/telegram-action@master
         with:

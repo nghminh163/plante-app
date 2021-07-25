@@ -35,7 +35,7 @@ platform :ios do
     app_store_connect_api_key(
       key_id: ENV['KEY_ID'],
       issuer_id: ENV['ISSUER_ID'],
-      key_filepath: ENV['KEY_FILE'],
+      key: ENV['KEY_FILE'],
       in_house: false
     )
     

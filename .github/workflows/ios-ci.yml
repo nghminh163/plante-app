@@ -1,7 +1,7 @@
 name: iOS Build
 on:
   push:
-    branches: [develop, main, ios*]
+    branches: [develop, main, ios*, test-*]
     commit-ignore:
       - [skip ci]
       - [ci skip]
@@ -20,15 +20,15 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{ github.ref }}
-      - name: Run Flutter tasks
-        uses: subosito/flutter-action@v1
-        with:
-          flutter-version: "2.0.5"
-      - name: Install dependancies for Flutter
-        run: flutter pub get
-      - name: Flutter build without sign
-        run: flutter build ios --release --no-codesign
-      - name: Deploy iOS Beta to TestFlight via Fastlane
+      # - name: Run Flutter tasks
+      #   uses: subosito/flutter-action@v1
+      #   with:
+      #     flutter-version: "2.0.5"
+      # - name: Install dependancies for Flutter
+      #   run: flutter pub get
+      # - name: Flutter build without sign
+      #   run: flutter build ios --release --no-codesign
+      # - name: Deploy iOS Beta to TestFlight via Fastlane
         uses: maierj/fastlane-action@v1.4.0
         with:
           lane: beta
@@ -50,7 +50,8 @@ jobs:
           KEY_CONTENT: "${{secrets.KEY_CONTENT}}"
 
   send_notification:
-    name: Deploy beta build to TestFlight
+    name: Send notification
+    needs: deploy_ios
     runs-on: ubuntu-latest
     steps:
       - name: Notify by Telegram

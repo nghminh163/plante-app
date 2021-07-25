@@ -66,6 +66,3 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           args: The new version for iOS released on Testflight 🙆‍♂️🙆‍♀️
-        env:
-          TELEGRAM_TO: "${{ secrets.TELEGRAM_TO }}"
-          TELEGRAM_TOKEN: "${{ secrets.TELEGRAM_TOKEN }}"

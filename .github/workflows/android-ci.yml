@@ -1,12 +1,12 @@
 name: iOS Build
 on:
   push:
-    branches: [develop, main, ios*]
+    branches: [develop, main, android*]
     commit-ignore:
       - [skip ci]
       - [ci skip]
   pull_request:
-    branches: [develop, main, ios*]
+    branches: [develop, main, android*]
     commit-ignore:
       - [skip ci]
       - [ci skip]

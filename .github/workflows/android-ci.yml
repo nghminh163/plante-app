@@ -1,4 +1,4 @@
-name: iOS Build
+name: Android Build
 on:
   push:
     branches: [develop, main, android*]
@@ -12,24 +12,39 @@ on:
       - [ci skip]
 
 jobs:
-  deploy_android:
-    name: Deploy beta build to TestFlight
-    runs-on: ubuntu-latest
+  deploy_ios:
+    name: Distribute beta build with Telegram
+    runs-on: macOS-latest
     steps:
-      - name: Set selected color
-        run: echo '::set-output name=SELECTED_COLOR::green'
-        id: random-color-generator
-      - name: Get color
-        run: echo "The selected color is ${{ steps.random-color-generator.outputs.SELECTED_COLOR }}"
       - name: Checkout code from ref
         uses: actions/checkout@v2
         with:
           ref: ${{ github.ref }}
+      - name: Decode keystore
+        working-directory: android/app
+        run: |
+          echo "${{secrets.ANDROID_KEYSTORE}}" > plante.asc
+          gpg -d --passphrase "${{secrets.KEYSTORE_PASSPHRASE}}" --batch plante.asc > plante.jks
 
-      - name: Notify by Telegram
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          document: ./README.md
-          message: The new version for android released on Testflight 🙆‍♂️🙆‍♀️
+#      - name: Run Flutter tasks
+#        uses: subosito/flutter-action@v1
+#        with:
+#          flutter-version: "2.0.5"
+#      - name: Install dependancies for Flutter
+#        run: flutter pub get
+#      - name: Flutter build without sign
+#        run: flutter build ios --release --no-codesign
+#      - name: Deploy iOS Beta to TestFlight via Fastlane
+#        uses: maierj/fastlane-action@v1.4.0
+#        with:
+#          lane: closed_beta
+#          subdirectory: ios
+
+#  DEVELOPER_APP_IDENTIFIER
+
+#      - name: Notify by Telegram
+#        uses: appleboy/telegram-action@master
+#        with:
+#          to: ${{ secrets.TELEGRAM_TO }}
+#          token: ${{ secrets.TELEGRAM_TOKEN }}
+#          args: The new version for Android released 🙆‍♂️🙆‍♀️

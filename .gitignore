@@ -51,3 +51,6 @@ app.*.map.json
 ios/build/*
 
 .env
+android/fastlane/report.xml
+android/fastlane/README.md
+*.jks

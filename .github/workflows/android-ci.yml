@@ -1,0 +1,31 @@
+name: iOS Build
+on:
+  push:
+    branches: [develop, main, ios*]
+    commit-ignore:
+      - [skip ci]
+      - [ci skip]
+  pull_request:
+    branches: [develop, main, ios*]
+    commit-ignore:
+      - [skip ci]
+      - [ci skip]
+
+jobs:
+  deploy_android:
+    name: Deploy beta build to TestFlight
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set selected color
+        run: echo '::set-output name=SELECTED_COLOR::green'
+        id: random-color-generator
+      - name: Get color
+        run: echo "The selected color is ${{ steps.random-color-generator.outputs.SELECTED_COLOR }}"
+
+      - name: Notify by Telegram
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message_file: ./README.md
+          message: The new version for android released on Testflight 🙆‍♂️🙆‍♀️
